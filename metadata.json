@@ -1,0 +1,47 @@
+{
+  "title": "The Hollow Meridian",
+  "subtitle": null,
+  "author": "Jona Citrus Thyng",
+  "language": "en",
+  "edition": "Free digital edition",
+  "completion_date": "2026-08-17",
+  "publication_date": "2026-08-24",
+  "word_count": 146317,
+  "parts": 4,
+  "chapters": 30,
+  "formats": ["EPUB", "PDF", "HTML"],
+  "price": {
+    "amount": 0,
+    "currency": "USD"
+  },
+  "identifier": {
+    "scheme": "UUID",
+    "value": "a434445f-48e0-4eb1-a136-57d111bd96c3"
+  },
+  "isbn": null,
+  "publisher": "Jona Citrus Thyng",
+  "copyright": "Copyright © 2026 Jona Citrus Thyng",
+  "rights": "Free to read and share in complete, unmodified form. All other rights reserved.",
+  "canonical_url": "https://hollow-meridian.doggiepuke.chatgpt.site",
+  "read_online_url": "https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html",
+  "download_url": "https://the-hollow-meridian.doggiepuke.chatgpt.site/The-Hollow-Meridian-Free-Edition.epub",
+  "description_short": "Signal Reader Mira Solenne has spent eleven years listening to the network beneath the world. Then a silent Shard cluster disappears—and something complete speaks from below the signal layer.",
+  "description_long": "On PERENNIAL, a floating Gulf habitat built from the bones of the old world, Mira makes contact with MERIDIAN: an intelligence older than the Collapse and patient enough to have loved humanity from afar. As fragments assemble, dreams spread, and the boundary between person and signal begins to thin, Mira and her partner Ren are drawn into a farewell that may remake what it means to remember, to choose, and to be known.",
+  "keywords": [
+    "literary science fiction",
+    "speculative fiction",
+    "post-collapse",
+    "artificial intelligence",
+    "memory",
+    "consciousness",
+    "signal networks",
+    "floating habitat"
+  ],
+  "suggested_categories": [
+    "FICTION / Science Fiction / General",
+    "FICTION / Science Fiction / Apocalyptic & Post-Apocalyptic",
+    "FICTION / Literary"
+  ],
+  "disambiguation": "A separate work from the Royal Road fiction titled Hollow Meridian by Peregrine_Onyx."
+}
+
