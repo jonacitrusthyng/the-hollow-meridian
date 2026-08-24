@@ -6,7 +6,7 @@
 
 *A signal from beneath the network. A farewell that changes what it means to be known.*
 
-[Read in your browser](https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html) · [Download EPUB](The-Hollow-Meridian-Free-Edition.epub) · [Download PDF](The-Hollow-Meridian-Free-Edition.pdf) · [Official site](https://hollow-meridian.doggiepuke.chatgpt.site)
+[Read in your browser](https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html) · [Download EPUB](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.epub) · [Download PDF](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.pdf) · [Download complete kit](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Distribution-Kit.zip) · [Official site](https://hollow-meridian.doggiepuke.chatgpt.site)
 
 ## About the novel
 
