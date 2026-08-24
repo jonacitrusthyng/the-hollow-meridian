@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you reference this novel, please cite it using this metadata."
+type: book
+title: "The Hollow Meridian"
+authors:
+  - family-names: "Thyng"
+    given-names: "Jona Citrus"
+date-released: 2026-08-24
+version: "1.0"
+url: "https://hollow-meridian.doggiepuke.chatgpt.site"
+abstract: >-
+  Signal Reader Mira Solenne has spent eleven years listening to the network
+  beneath the world. Then a silent Shard cluster disappears—and something
+  complete speaks from below the signal layer.
