@@ -87,3 +87,4 @@ jobs:
               --target "$(git rev-parse HEAD)" \
               --title "The Hollow Meridian — Corrected Free Digital Edition v1.0.1" \
               --notes "Corrected free digital edition of The Hollow Meridian by Jona Citrus Thyng. Complete 146,332-word novel in four parts and 30 chapters. This bounded correction resolves continuity, attribution, pronoun, timeline, and edition-formatting issues while preserving the story, title, character names, themes, relationships, voice, and ending. Copyright © 2026 Jona Citrus Thyng. Free to read and share in complete, unmodified form. All other rights reserved."
+          fi
