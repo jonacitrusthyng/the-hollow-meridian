@@ -1,0 +1,54 @@
+name: Import verified release assets
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/import-release-assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download official release assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --output The-Hollow-Meridian-Free-Edition.epub \
+            https://the-hollow-meridian.doggiepuke.chatgpt.site/The-Hollow-Meridian-Free-Edition.epub
+          curl --fail --location --retry 3 --output The-Hollow-Meridian-Free-Edition.pdf \
+            https://the-hollow-meridian.doggiepuke.chatgpt.site/The-Hollow-Meridian-Free-Edition.pdf
+          curl --fail --location --retry 3 --output The-Hollow-Meridian-Cover.png \
+            https://the-hollow-meridian.doggiepuke.chatgpt.site/the-hollow-meridian-cover.png
+          curl --fail --location --retry 3 --output The-Hollow-Meridian-Share-Card.png \
+            https://the-hollow-meridian.doggiepuke.chatgpt.site/og.png
+
+      - name: Verify release integrity
+        shell: bash
+        run: sha256sum --check SHA256SUMS.txt
+
+      - name: Commit verified assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            The-Hollow-Meridian-Free-Edition.epub \
+            The-Hollow-Meridian-Free-Edition.pdf \
+            The-Hollow-Meridian-Cover.png \
+            The-Hollow-Meridian-Share-Card.png
+          if git diff --cached --quiet; then
+            echo "Release assets are already current."
+          else
+            git commit -m "Add verified release assets"
+            git push
+          fi
