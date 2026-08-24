@@ -18,18 +18,25 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Download official release assets
+      - name: Download official v1.0.1 assets
         shell: bash
         run: |
           set -euo pipefail
+          base_url="https://the-hollow-meridian.doggiepuke.chatgpt.site"
           curl --fail --location --retry 3 --output The-Hollow-Meridian-Free-Edition.epub \
-            https://the-hollow-meridian.doggiepuke.chatgpt.site/The-Hollow-Meridian-Free-Edition.epub
+            "$base_url/The-Hollow-Meridian-Free-Edition.epub"
           curl --fail --location --retry 3 --output The-Hollow-Meridian-Free-Edition.pdf \
-            https://the-hollow-meridian.doggiepuke.chatgpt.site/The-Hollow-Meridian-Free-Edition.pdf
+            "$base_url/The-Hollow-Meridian-Free-Edition.pdf"
+          curl --fail --location --retry 3 --output The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx \
+            "$base_url/The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx"
+          curl --fail --location --retry 3 --output The-Hollow-Meridian-v1.0.1-Correction-Log.md \
+            "$base_url/The-Hollow-Meridian-v1.0.1-Correction-Log.md"
+          curl --fail --location --retry 3 --output The-Hollow-Meridian-Distribution-Kit.zip \
+            "$base_url/The-Hollow-Meridian-Distribution-Kit.zip"
           curl --fail --location --retry 3 --output The-Hollow-Meridian-Cover.png \
-            https://the-hollow-meridian.doggiepuke.chatgpt.site/the-hollow-meridian-cover.png
+            "$base_url/the-hollow-meridian-cover.png"
           curl --fail --location --retry 3 --output The-Hollow-Meridian-Share-Card.png \
-            https://the-hollow-meridian.doggiepuke.chatgpt.site/og.png
+            "$base_url/og.png"
 
       - name: Verify release integrity
         shell: bash
@@ -44,32 +51,19 @@ jobs:
           git add \
             The-Hollow-Meridian-Free-Edition.epub \
             The-Hollow-Meridian-Free-Edition.pdf \
+            The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx \
+            The-Hollow-Meridian-v1.0.1-Correction-Log.md \
+            The-Hollow-Meridian-Distribution-Kit.zip \
             The-Hollow-Meridian-Cover.png \
             The-Hollow-Meridian-Share-Card.png
           if git diff --cached --quiet; then
             echo "Release assets are already current."
           else
-            git commit -m "Add verified release assets"
+            git commit -m "Import verified v1.0.1 release assets"
             git push
           fi
 
-      - name: Package distribution kit
-        shell: bash
-        run: |
-          set -euo pipefail
-          zip -9 The-Hollow-Meridian-Distribution-Kit.zip \
-            README.md \
-            CITATION.cff \
-            metadata.json \
-            PLATFORM-COPY.md \
-            SHARING-PERMISSION.txt \
-            SHA256SUMS.txt \
-            The-Hollow-Meridian-Free-Edition.epub \
-            The-Hollow-Meridian-Free-Edition.pdf \
-            The-Hollow-Meridian-Cover.png \
-            The-Hollow-Meridian-Share-Card.png
-
-      - name: Create or update v1.0.0 release
+      - name: Create or update v1.0.1 release
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -79,16 +73,17 @@ jobs:
             The-Hollow-Meridian-Distribution-Kit.zip
             The-Hollow-Meridian-Free-Edition.epub
             The-Hollow-Meridian-Free-Edition.pdf
+            The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx
+            The-Hollow-Meridian-v1.0.1-Correction-Log.md
             The-Hollow-Meridian-Cover.png
             The-Hollow-Meridian-Share-Card.png
             SHA256SUMS.txt
             SHARING-PERMISSION.txt
           )
-          if gh release view v1.0.0 >/dev/null 2>&1; then
-            gh release upload v1.0.0 "${release_assets[@]}" --clobber
+          if gh release view v1.0.1 >/dev/null 2>&1; then
+            gh release upload v1.0.1 "${release_assets[@]}" --clobber
           else
-            gh release create v1.0.0 "${release_assets[@]}" \
+            gh release create v1.0.1 "${release_assets[@]}" \
               --target "$(git rev-parse HEAD)" \
-              --title "The Hollow Meridian — Free Digital Edition v1.0.0" \
-              --notes "Official free digital edition of The Hollow Meridian by Jona Citrus Thyng. Complete 146,317-word novel in four parts and 30 chapters. Copyright © 2026 Jona Citrus Thyng. Free to read and share in complete, unmodified form. All other rights reserved."
-          fi
+              --title "The Hollow Meridian — Corrected Free Digital Edition v1.0.1" \
+              --notes "Corrected free digital edition of The Hollow Meridian by Jona Citrus Thyng. Complete 146,332-word novel in four parts and 30 chapters. This bounded correction resolves continuity, attribution, pronoun, timeline, and edition-formatting issues while preserving the story, title, character names, themes, relationships, voice, and ending. Copyright © 2026 Jona Citrus Thyng. Free to read and share in complete, unmodified form. All other rights reserved."

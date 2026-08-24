@@ -1,5 +1,7 @@
-791fbf7ba02ddfbc83d3e49260c0e638a26323036f280d090a9d64c6903aaafa  The-Hollow-Meridian-Free-Edition.epub
-ee770be2e493eab6556ba7cae2fd6275b6615d56ca8ae7713a25bcfc6f94c99d  The-Hollow-Meridian-Free-Edition.pdf
+494e2a534d77f04d488b34216a5e08b205771d30b96648fabbc9221f21ce2e46  The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx
+5f7b00046c3e697aca9bc2afa388aedc134639ead8828433c4b87e0f816603bb  The-Hollow-Meridian-Free-Edition.epub
+dde4bd384b1043c808e4fd442707fc95435974013b4674308907ef77e4079026  The-Hollow-Meridian-Free-Edition.pdf
+4f718d27a74abeb737b2726bd0fa6c2304f0de122ac9a89032d0c8540f609d87  The-Hollow-Meridian-v1.0.1-Correction-Log.md
+a5f649bb524eb7defae1a1f623370b698d9a24b02c3306180516c3bd9a5c0c1c  The-Hollow-Meridian-Distribution-Kit.zip
 e18ab27595c137b53a7ce4122c6cf912a95fdcb60a4da05b3e4c9b454f0c89d6  The-Hollow-Meridian-Cover.png
 ff779bd8ec4ef98d33b546a5d72789d862c8d3f9e748c44dbec89fcf0b491dff  The-Hollow-Meridian-Share-Card.png
-

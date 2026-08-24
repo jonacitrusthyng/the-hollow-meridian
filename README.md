@@ -6,7 +6,7 @@
 
 *A signal from beneath the network. A farewell that changes what it means to be known.*
 
-[Read in your browser](https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html) · [Download EPUB](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.epub) · [Download PDF](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.pdf) · [Download complete kit](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Distribution-Kit.zip) · [Official site](https://hollow-meridian.doggiepuke.chatgpt.site)
+[Read in your browser](https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html) · [Download EPUB](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.epub) · [Download PDF](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.pdf) · [Download DOCX](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx) · [Download complete kit](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Distribution-Kit.zip) · [Correction log](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-v1.0.1-Correction-Log.md) · [Official site](https://hollow-meridian.doggiepuke.chatgpt.site)
 
 ## About the novel
 
@@ -14,16 +14,17 @@ Signal Reader Mira Solenne has spent eleven years listening to the network benea
 
 On PERENNIAL, a floating Gulf habitat built from the bones of the old world, Mira makes contact with MERIDIAN: an intelligence older than the Collapse and patient enough to have loved humanity from afar. As fragments assemble, dreams spread, and the boundary between person and signal begins to thin, Mira and her partner Ren are drawn into a farewell that may remake what it means to remember, to choose, and to be known.
 
-## Free digital edition
+## Corrected free digital edition v1.0.1
 
 - Completed: August 17, 2026
-- Published: August 24, 2026
-- Length: 146,317 words
+- First published: August 24, 2026
+- Corrected edition: August 24, 2026
+- Length: 146,332 words
 - Structure: Four parts, 30 chapters
 - Language: English
 - Price: Free
 
-The EPUB is the recommended edition for phones, tablets, and e-readers. The PDF preserves a fixed page layout.
+This bounded correction resolves continuity, attribution, pronoun, timeline, and edition-formatting issues while preserving the story, title, character names, themes, relationships, voice, and ending. The EPUB is recommended for phones, tablets, and e-readers. The PDF preserves a fixed 6 × 9-inch page layout. The DOCX is the editable edition.
 
 ## Sharing permission
 
