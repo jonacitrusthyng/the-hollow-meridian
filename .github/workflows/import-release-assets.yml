@@ -52,3 +52,43 @@ jobs:
             git commit -m "Add verified release assets"
             git push
           fi
+
+      - name: Package distribution kit
+        shell: bash
+        run: |
+          set -euo pipefail
+          zip -9 The-Hollow-Meridian-Distribution-Kit.zip \
+            README.md \
+            CITATION.cff \
+            metadata.json \
+            PLATFORM-COPY.md \
+            SHARING-PERMISSION.txt \
+            SHA256SUMS.txt \
+            The-Hollow-Meridian-Free-Edition.epub \
+            The-Hollow-Meridian-Free-Edition.pdf \
+            The-Hollow-Meridian-Cover.png \
+            The-Hollow-Meridian-Share-Card.png
+
+      - name: Create or update v1.0.0 release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_assets=(
+            The-Hollow-Meridian-Distribution-Kit.zip
+            The-Hollow-Meridian-Free-Edition.epub
+            The-Hollow-Meridian-Free-Edition.pdf
+            The-Hollow-Meridian-Cover.png
+            The-Hollow-Meridian-Share-Card.png
+            SHA256SUMS.txt
+            SHARING-PERMISSION.txt
+          )
+          if gh release view v1.0.0 >/dev/null 2>&1; then
+            gh release upload v1.0.0 "${release_assets[@]}" --clobber
+          else
+            gh release create v1.0.0 "${release_assets[@]}" \
+              --target "$(git rev-parse HEAD)" \
+              --title "The Hollow Meridian — Free Digital Edition v1.0.0" \
+              --notes "Official free digital edition of The Hollow Meridian by Jona Citrus Thyng. Complete 146,317-word novel in four parts and 30 chapters. Copyright © 2026 Jona Citrus Thyng. Free to read and share in complete, unmodified form. All other rights reserved."
+          fi
