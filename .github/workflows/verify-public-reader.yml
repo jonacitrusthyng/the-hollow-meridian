@@ -1,0 +1,94 @@
+name: Verify public reader text
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/verify-public-reader.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-readers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Compare served document text with the reviewed HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          import json
+          from pathlib import Path
+          from urllib.request import urlopen
+
+          class DocumentText(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.skip = 0
+                  self.in_body = False
+                  self.in_title = False
+                  self.body = []
+                  self.title = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag in ("script", "style"):
+                      self.skip += 1
+                  if tag == "body":
+                      self.in_body = True
+                  if tag == "title":
+                      self.in_title = True
+
+              def handle_endtag(self, tag):
+                  if tag in ("script", "style"):
+                      self.skip = max(0, self.skip - 1)
+                  if tag == "body":
+                      self.in_body = False
+                  if tag == "title":
+                      self.in_title = False
+
+              def handle_data(self, data):
+                  if self.skip:
+                      return
+                  if self.in_title:
+                      self.title.append(data)
+                  if self.in_body:
+                      self.body.append(data)
+
+          def text_of(raw):
+              parser = DocumentText()
+              parser.feed(raw.decode("utf-8"))
+              return (" ".join(" ".join(parser.body).split()),
+                      " ".join(" ".join(parser.title).split()))
+
+          routes = (
+              ("Hollow-Meridian-signal-Illustrated-Edition.html", "Hollow-Meridian-signal-Illustrated-Edition.html"),
+              ("read.html", "Hollow-Meridian-signal-Illustrated-Edition.html"),
+              ("drift-preview.html", "drift-preview.html"),
+          )
+          checks = []
+          for host in ("https://hollow-meridian.doggiepuke.chatgpt.site", "https://the-hollow-meridian.doggiepuke.chatgpt.site"):
+              for route, canonical in routes:
+                  expected, expected_title = text_of(Path(canonical).read_bytes())
+                  url = host + "/" + route
+                  with urlopen(url, timeout=60) as response:
+                      actual, title = text_of(response.read())
+                  check = {
+                      "url": url,
+                      "title": title,
+                      "expected_title": expected_title,
+                      "canonical_characters": len(expected),
+                      "served_characters": len(actual),
+                      "visible_text_equal": actual == expected,
+                  }
+                  checks.append(check)
+                  print(json.dumps(check, ensure_ascii=False))
+          if not all(check["visible_text_equal"] for check in checks):
+              raise SystemExit("A public reader differs from the reviewed document text")
+          PY
