@@ -26,7 +26,8 @@ jobs:
           from html.parser import HTMLParser
           import json
           from pathlib import Path
-          from urllib.request import urlopen
+          import subprocess
+          import tempfile
 
           class DocumentText(HTMLParser):
               def __init__(self):
@@ -77,8 +78,24 @@ jobs:
               for route, canonical in routes:
                   expected, expected_title = text_of(Path(canonical).read_bytes())
                   url = host + "/" + route
-                  with urlopen(url, timeout=60) as response:
-                      actual, title = text_of(response.read())
+                  # curl decodes supported gzip/Brotli transfer encodings before
+                  # parsing. Retain only three safe response metadata fields.
+                  with tempfile.TemporaryDirectory() as temporary:
+                      response_path = Path(temporary) / "document.html"
+                      header_path = Path(temporary) / "response-headers.txt"
+                      subprocess.run([
+                          "curl", "--fail", "--location", "--silent", "--show-error",
+                          "--compressed", "--retry", "2", "--max-time", "60",
+                          "--proto", "=https", "--tlsv1.2",
+                          "--dump-header", str(header_path),
+                          "--output", str(response_path), url,
+                      ], check=True)
+                      metadata = {}
+                      for line in header_path.read_text().splitlines():
+                          key, separator, value = line.partition(":")
+                          if separator and key.lower() in ("content-type", "content-encoding", "content-length"):
+                              metadata[key.lower()] = value.strip()
+                      actual, title = text_of(response_path.read_bytes())
                   check = {
                       "url": url,
                       "title": title,
@@ -86,6 +103,7 @@ jobs:
                       "canonical_characters": len(expected),
                       "served_characters": len(actual),
                       "visible_text_equal": actual == expected,
+                      "response_metadata": metadata,
                   }
                   checks.append(check)
                   print(json.dumps(check, ensure_ascii=False))
