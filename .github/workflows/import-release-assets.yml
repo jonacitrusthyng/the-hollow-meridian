@@ -48,8 +48,6 @@ jobs:
             Hollow-Meridian-signal-Illustrated-Edition.pdf
             Hollow-Meridian-signal-Illustrated-Edition.epub
             Hollow-Meridian-signal-Illustrated-Edition.docx
-            Hollow-Meridian-signal-Illustrated-Edition.html
-            drift-preview.html
             hollow-meridian-signal-cover.png
             Hollow-Meridian-signal-Distribution-Kit.zip
             metadata.json
@@ -61,6 +59,33 @@ jobs:
             curl --fail --location --retry 3 --proto '=https' --tlsv1.2 \
               --output ".release-stage/$asset" "$SOURCE_URL/$asset"
           done
+
+      - name: Restore canonical HTML from the verified distribution kit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import pathlib
+          import zipfile
+
+          stage = pathlib.Path(".release-stage")
+          kit_name = "Hollow-Meridian-signal-Distribution-Kit.zip"
+          matches = [line.split("  ", 1)[0] for line in pathlib.Path("SHA256SUMS.txt").read_text().splitlines()
+                     if line.endswith("  " + kit_name)]
+          if len(matches) != 1:
+              raise SystemExit("Missing or duplicate committed distribution-kit checksum")
+          if hashlib.sha256((stage / kit_name).read_bytes()).hexdigest() != matches[0]:
+              raise SystemExit("Distribution-kit checksum mismatch before HTML extraction")
+          # Hosting may transform HTML responses. Preserve the reviewed standalone
+          # edition bytes by extracting only these names from the verified kit.
+          with zipfile.ZipFile(stage / kit_name) as kit:
+              for name in ("Hollow-Meridian-signal-Illustrated-Edition.html", "drift-preview.html"):
+                  if kit.namelist().count(name) != 1:
+                      raise SystemExit(f"Missing or duplicate HTML kit member: {name}")
+                  (stage / name).write_bytes(kit.read(name))
+                  print(f"Restored canonical {name}")
+          PY
 
       - name: Verify staged bytes against the committed checksums
         shell: bash
