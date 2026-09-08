@@ -1,20 +1,33 @@
 {
-  "title": "The Hollow Meridian",
+  "title": "Hollow Meridian: signal",
+  "former_title": "The Hollow Meridian",
+  "subtitle": "The Unaltered Timeline",
   "author": "Jona Citrus Thyng",
+  "series": "Hollow Meridian",
+  "series_position": 1,
   "language": "en",
-  "edition": "Corrected free digital edition v1.0.1",
-  "version": "1.0.1",
-  "completion_date": "2026-08-17",
+  "edition": "Illustrated free saga edition v2.0.0",
+  "version": "2.0.0",
   "publication_date": "2026-08-24",
-  "revision_date": "2026-08-24",
-  "word_count": 146332,
-  "parts": 4,
+  "revision_date": "2026-09-08",
+  "word_count": 146294,
+  "word_count_basis": "Narrative and chapter headings; excludes front and back matter.",
   "chapters": 30,
-  "formats": ["EPUB", "PDF", "DOCX", "HTML"],
-  "price": { "amount": 0, "currency": "USD" },
+  "interior_illustrations": 6,
+  "pdf_pages": 354,
+  "formats": [
+    "EPUB",
+    "PDF",
+    "DOCX",
+    "HTML"
+  ],
+  "price": {
+    "amount": 0,
+    "currency": "USD"
+  },
   "identifier": {
-    "scheme": "UUID",
-    "value": "a434445f-48e0-4eb1-a136-57d111bd96c3"
+    "scheme": "URI",
+    "value": "urn:uuid:526ab76e-84cf-0e4f-228a-e357ab9b90e6"
   },
   "isbn": null,
   "publisher": "Jona Citrus Thyng",
@@ -23,17 +36,36 @@
   "canonical_url": "https://hollow-meridian.doggiepuke.chatgpt.site",
   "mirror_url": "https://the-hollow-meridian.doggiepuke.chatgpt.site",
   "read_online_url": "https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html",
-  "download_url": "https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.epub",
-  "description": "Signal Reader Mira Solenne has spent eleven years listening to the network beneath the world. Then a silent Shard cluster disappears—and something complete speaks from below the signal layer.",
+  "description": "Mira Solenne discovers a voice beneath the signal layer. On an inhabited Gulf platform, listening becomes a question of consciousness, love, and the cost of letting another being choose. The complete illustrated first novel in the Hollow Meridian saga follows the unaltered timeline.",
+  "saga": [
+    {
+      "number": 1,
+      "title": "Hollow Meridian: signal",
+      "subtitle": "The Unaltered Timeline",
+      "status": "Complete free illustrated edition"
+    },
+    {
+      "number": 2,
+      "title": "Hollow Meridian: drift",
+      "subtitle": "The First Temporal Intervention",
+      "former_working_title": "Signal from 2176",
+      "status": "Preview available; complete manuscript not included in this free release"
+    },
+    {
+      "number": 3,
+      "title": "Hollow Meridian: fracture",
+      "subtitle": "The Price of Temporal Meddling",
+      "status": "In development"
+    }
+  ],
+  "prose_sha256": "0350e10c5a44c43b00f30416f2687212221c8e23fd81cbacdd790694bd63549b",
   "keywords": [
     "literary science fiction",
-    "speculative fiction",
-    "post-collapse",
     "artificial intelligence",
-    "memory",
     "consciousness",
-    "signal networks",
+    "memory",
+    "autonomy",
+    "illustrated novel",
     "floating habitat"
-  ],
-  "disambiguation": "A separate work from the Royal Road fiction titled Hollow Meridian by Peregrine_Onyx."
+  ]
 }
