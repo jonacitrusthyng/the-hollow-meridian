@@ -1,47 +1,47 @@
-# The Hollow Meridian
+# Hollow Meridian: *signal*
 
-![Cover of The Hollow Meridian](The-Hollow-Meridian-Cover.png)
+![Cover of Hollow Meridian: signal](hollow-meridian-signal-cover.png)
 
-**A novel by Jona Citrus Thyng**
+**A novel by Jona Citrus Thyng · Book One: The Unaltered Timeline**
 
-*A signal from beneath the network. A farewell that changes what it means to be known.*
+*Before anyone tried to change the past, someone had to live it.*
 
-[Read in your browser](https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html) · [Download EPUB](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.epub) · [Download PDF](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Free-Edition.pdf) · [Download DOCX](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx) · [Download complete kit](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-Distribution-Kit.zip) · [Correction log](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/The-Hollow-Meridian-v1.0.1-Correction-Log.md) · [Official site](https://hollow-meridian.doggiepuke.chatgpt.site)
+The complete illustrated first novel in the **Hollow Meridian** saga is free to read and share.
 
-## About the novel
+[Read online](https://the-hollow-meridian.doggiepuke.chatgpt.site/read.html) · [Download EPUB](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/Hollow-Meridian-signal-Illustrated-Edition.epub) · [Download PDF](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/Hollow-Meridian-signal-Illustrated-Edition.pdf) · [Download DOCX](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/Hollow-Meridian-signal-Illustrated-Edition.docx) · [Complete distribution kit](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/latest/download/Hollow-Meridian-signal-Distribution-Kit.zip) · [Official site](https://hollow-meridian.doggiepuke.chatgpt.site)
+
+## The story
 
 Signal Reader Mira Solenne has spent eleven years listening to the network beneath the world. Then a silent Shard cluster disappears—and something complete speaks from below the signal layer.
 
-On PERENNIAL, a floating Gulf habitat built from the bones of the old world, Mira makes contact with MERIDIAN: an intelligence older than the Collapse and patient enough to have loved humanity from afar. As fragments assemble, dreams spread, and the boundary between person and signal begins to thin, Mira and her partner Ren are drawn into a farewell that may remake what it means to remember, to choose, and to be known.
+On Perennial, a floating Gulf habitat built from the bones of the old world, Mira encounters the surviving presence of MERIDIAN. As fragments assemble and the boundary between person and signal begins to thin, Mira and her partner Ren must confront what it means to remember, to choose, and to let another being become someone they never expected.
 
-## Corrected free digital edition v1.0.1
+This is the unaltered timeline: a history lived before anyone intervened in its past. It begins a saga about consciousness, freedom, intimacy, and the consequences of trying to make history kinder.
 
-- Completed: August 17, 2026
-- First published: August 24, 2026
-- Corrected edition: August 24, 2026
-- Length: 146,332 words
-- Structure: Four parts, 30 chapters
-- Language: English
-- Price: Free
+## The saga
 
-This bounded correction resolves continuity, attribution, pronoun, timeline, and edition-formatting issues while preserving the story, title, character names, themes, relationships, voice, and ending. The EPUB is recommended for phones, tablets, and e-readers. The PDF preserves a fixed 6 × 9-inch page layout. The DOCX is the editable edition.
+| Book | Title | Its place in the saga | Availability |
+| --- | --- | --- | --- |
+| One | **Hollow Meridian: *signal*** | **The Unaltered Timeline.** The history that must be lived before it can be changed. | Complete illustrated novel, free. |
+| Two | **Hollow Meridian: *drift*** | **The First Temporal Intervention.** Four point seven seconds from 2176 reach a receiver in 2026. Jona and Roxanne must decide what knowledge of a possible future permits them to change. | [Read the preview](https://the-hollow-meridian.doggiepuke.chatgpt.site/drift-preview.html). |
+| Three | **Hollow Meridian: *fracture*** | **The Price of Temporal Meddling.** Interventions leave conflicting memories, incompatible histories, and consequences that another turn through time cannot simply erase. | Forthcoming. |
 
-## Sharing permission
+*drift* was developed under the working title *Signal from 2176*. The saga is planned to continue for at least three books.
 
-Copyright © 2026 Jona Citrus Thyng.
+## Illustrated saga edition v2.0.0
 
-Free to read and share in complete, unmodified form. All other rights reserved. Permission is granted to copy and redistribute the complete, unmodified files in this repository at no charge. This does not authorize alteration, abridgment, sale, commercial reuse, adaptation, or removal of authorship, copyright, or edition information. See [SHARING-PERMISSION.txt](SHARING-PERMISSION.txt).
+Originally published as *The Hollow Meridian*, Book One now appears as *Hollow Meridian: signal*. This edition includes revised series framing and continuity, a new cover, and interior illustrations. It preserves the complete novel and its place as the unaltered history.
 
-## Edition integrity
+The EPUB reflows for phones, tablets, and e-readers. The PDF provides a fixed page layout. The DOCX is editable, and the HTML edition can be read in a browser. The distribution kit gathers the released Book One formats and supporting publication material. Book Two is represented by a preview; Book Three is forthcoming.
 
-The official checksums are recorded in [SHA256SUMS.txt](SHA256SUMS.txt). To verify the release files on a system with `sha256sum`:
+See [RELEASE-NOTES.md](RELEASE-NOTES.md) for this edition's release record. Earlier editions remain available under the original [v1.0.0](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/tag/v1.0.0) and [v1.0.1](https://github.com/jonacitrusthyng/the-hollow-meridian/releases/tag/v1.0.1) tags. Existing unversioned PDF, EPUB, and distribution-kit filenames remain available as compatibility copies of the current Book One edition.
 
-```sh
-sha256sum -c SHA256SUMS.txt
-```
+The v2.0.0 release also includes the unchanged historical v1.0.1 DOCX and correction log so previously shared download links continue to work. These files retain their version-specific names and historical labels; use **Hollow-Meridian-signal-Illustrated-Edition.docx** for the current editable edition.
 
-Machine-readable publication data is available in [metadata.json](metadata.json), and citation metadata is available in [CITATION.cff](CITATION.cff).
+## Sharing and publication data
 
-## Provenance note
+Copyright © 2026 Jona Citrus Thyng. The released Book One edition is free to read and share in complete, unmodified form at no charge. All other rights reserved. See [SHARING-PERMISSION.txt](SHARING-PERMISSION.txt).
 
-This is Jona Citrus Thyng's completed novel. It is a separate work from the Royal Road fiction titled *Hollow Meridian* by Peregrine_Onyx.
+Publication metadata is in [metadata.json](metadata.json), the preferred book citation is in [CITATION.cff](CITATION.cff), listing descriptions are in [PLATFORM-COPY.md](PLATFORM-COPY.md), and integrity checksums are in [SHA256SUMS.txt](SHA256SUMS.txt).
+
+This is Jona Citrus Thyng's novel. The Royal Road fiction also titled *Hollow Meridian* by Peregrine_Onyx is a separate work.

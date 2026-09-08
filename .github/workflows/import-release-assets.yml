@@ -1,4 +1,4 @@
-name: Import verified release assets
+name: Publish verified illustrated signal edition
 
 on:
   push:
@@ -11,80 +11,168 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: illustrated-signal-release-v2
+  cancel-in-progress: false
+
 jobs:
   import-assets:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: v2.0.0
+      RELEASE_TITLE: "Hollow Meridian: signal — Illustrated Saga Edition v2.0.0"
+      SOURCE_URL: "https://the-hollow-meridian.doggiepuke.chatgpt.site"
     steps:
-      - name: Check out repository
+      - name: Check out the reviewed publication commit
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
 
-      - name: Download official v1.0.1 assets
+      - name: Verify unchanged historical download compatibility files
         shell: bash
         run: |
           set -euo pipefail
-          base_url="https://the-hollow-meridian.doggiepuke.chatgpt.site"
-          curl --fail --location --retry 3 --output The-Hollow-Meridian-Free-Edition.epub \
-            "$base_url/The-Hollow-Meridian-Free-Edition.epub"
-          curl --fail --location --retry 3 --output The-Hollow-Meridian-Free-Edition.pdf \
-            "$base_url/The-Hollow-Meridian-Free-Edition.pdf"
-          curl --fail --location --retry 3 --output The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx \
-            "$base_url/The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx"
-          curl --fail --location --retry 3 --output The-Hollow-Meridian-v1.0.1-Correction-Log.md \
-            "$base_url/The-Hollow-Meridian-v1.0.1-Correction-Log.md"
-          curl --fail --location --retry 3 --output The-Hollow-Meridian-Distribution-Kit.zip \
-            "$base_url/The-Hollow-Meridian-Distribution-Kit.zip"
-          curl --fail --location --retry 3 --output The-Hollow-Meridian-Cover.png \
-            "$base_url/the-hollow-meridian-cover.png"
-          curl --fail --location --retry 3 --output The-Hollow-Meridian-Share-Card.png \
-            "$base_url/og.png"
+          sha256sum --check <<'HISTORICAL'
+          494e2a534d77f04d488b34216a5e08b205771d30b96648fabbc9221f21ce2e46  The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx
+          4f718d27a74abeb737b2726bd0fa6c2304f0de122ac9a89032d0c8540f609d87  The-Hollow-Meridian-v1.0.1-Correction-Log.md
+          HISTORICAL
 
-      - name: Verify release integrity
-        shell: bash
-        run: sha256sum --check SHA256SUMS.txt
-
-      - name: Commit verified assets
+      - name: Download the exact release manifest
         shell: bash
         run: |
           set -euo pipefail
+          test -s SHA256SUMS.txt
+          mkdir -p .release-stage
+          assets=(
+            Hollow-Meridian-signal-Illustrated-Edition.pdf
+            Hollow-Meridian-signal-Illustrated-Edition.epub
+            Hollow-Meridian-signal-Illustrated-Edition.docx
+            Hollow-Meridian-signal-Illustrated-Edition.html
+            drift-preview.html
+            hollow-meridian-signal-cover.png
+            Hollow-Meridian-signal-Distribution-Kit.zip
+            metadata.json
+            SHARING-PERMISSION.txt
+            RELEASE-NOTES.md
+            SHA256SUMS.txt
+          )
+          for asset in "${assets[@]}"; do
+            curl --fail --location --retry 3 --proto '=https' --tlsv1.2 \
+              --output ".release-stage/$asset" "$SOURCE_URL/$asset"
+          done
+
+      - name: Verify staged bytes against the committed checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmp SHA256SUMS.txt .release-stage/SHA256SUMS.txt
+          python3 - <<'PY'
+          import hashlib
+          import pathlib
+          import re
+
+          expected = (
+              "Hollow-Meridian-signal-Illustrated-Edition.pdf",
+              "Hollow-Meridian-signal-Illustrated-Edition.epub",
+              "Hollow-Meridian-signal-Illustrated-Edition.docx",
+              "Hollow-Meridian-signal-Illustrated-Edition.html",
+              "drift-preview.html",
+              "hollow-meridian-signal-cover.png",
+              "Hollow-Meridian-signal-Distribution-Kit.zip",
+              "metadata.json",
+              "SHARING-PERMISSION.txt",
+              "RELEASE-NOTES.md",
+          )
+          checksums = {}
+          for line in pathlib.Path("SHA256SUMS.txt").read_text().splitlines():
+              if not line.strip():
+                  continue
+              match = re.fullmatch(r"([0-9a-fA-F]{64}) [ *](.+)", line)
+              if match is None:
+                  raise SystemExit("Invalid committed checksum entry")
+              digest, name = match.groups()
+              if name in checksums:
+                  raise SystemExit(f"Duplicate committed checksum: {name}")
+              checksums[name] = digest.lower()
+          staged = pathlib.Path(".release-stage")
+          names = {path.name for path in staged.iterdir()}
+          if names != set(expected) | {"SHA256SUMS.txt"}:
+              raise SystemExit("Staged files do not match the release manifest")
+          for name in expected:
+              if name not in checksums:
+                  raise SystemExit(f"Missing committed checksum: {name}")
+              actual = hashlib.sha256((staged / name).read_bytes()).hexdigest()
+              if actual != checksums[name]:
+                  raise SystemExit(f"Checksum mismatch: {name}")
+              print(f"Verified {name}")
+          PY
+
+      - name: Install verified assets and compatible Book One filenames
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp .release-stage/* .
+          cp Hollow-Meridian-signal-Illustrated-Edition.epub The-Hollow-Meridian-Free-Edition.epub
+          cp Hollow-Meridian-signal-Illustrated-Edition.pdf The-Hollow-Meridian-Free-Edition.pdf
+          cp Hollow-Meridian-signal-Distribution-Kit.zip The-Hollow-Meridian-Distribution-Kit.zip
+          cp hollow-meridian-signal-cover.png The-Hollow-Meridian-Cover.png
+          cp hollow-meridian-signal-cover.png The-Hollow-Meridian-Share-Card.png
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
+            Hollow-Meridian-signal-Illustrated-Edition.pdf \
+            Hollow-Meridian-signal-Illustrated-Edition.epub \
+            Hollow-Meridian-signal-Illustrated-Edition.docx \
+            Hollow-Meridian-signal-Illustrated-Edition.html \
+            drift-preview.html \
+            hollow-meridian-signal-cover.png \
+            Hollow-Meridian-signal-Distribution-Kit.zip \
+            metadata.json SHARING-PERMISSION.txt RELEASE-NOTES.md SHA256SUMS.txt \
             The-Hollow-Meridian-Free-Edition.epub \
             The-Hollow-Meridian-Free-Edition.pdf \
-            The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx \
-            The-Hollow-Meridian-v1.0.1-Correction-Log.md \
             The-Hollow-Meridian-Distribution-Kit.zip \
             The-Hollow-Meridian-Cover.png \
             The-Hollow-Meridian-Share-Card.png
           if git diff --cached --quiet; then
-            echo "Release assets are already current."
+            echo "Verified release assets are already current."
           else
-            git commit -m "Import verified v1.0.1 release assets"
-            git push
+            git commit -m "Publish illustrated signal edition v2.0.0 assets"
+            git push origin HEAD:main
           fi
 
-      - name: Create or update v1.0.1 release
+      - name: Publish v2.0.0 without rewriting historical releases
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
           release_assets=(
-            The-Hollow-Meridian-Distribution-Kit.zip
+            Hollow-Meridian-signal-Illustrated-Edition.pdf
+            Hollow-Meridian-signal-Illustrated-Edition.epub
+            Hollow-Meridian-signal-Illustrated-Edition.docx
+            Hollow-Meridian-signal-Illustrated-Edition.html
+            drift-preview.html
+            hollow-meridian-signal-cover.png
+            Hollow-Meridian-signal-Distribution-Kit.zip
+            metadata.json
+            SHARING-PERMISSION.txt
+            RELEASE-NOTES.md
+            SHA256SUMS.txt
             The-Hollow-Meridian-Free-Edition.epub
             The-Hollow-Meridian-Free-Edition.pdf
-            The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx
-            The-Hollow-Meridian-v1.0.1-Correction-Log.md
+            The-Hollow-Meridian-Distribution-Kit.zip
             The-Hollow-Meridian-Cover.png
             The-Hollow-Meridian-Share-Card.png
-            SHA256SUMS.txt
-            SHARING-PERMISSION.txt
+            "The-Hollow-Meridian-Corrected-Free-Edition-v1.0.1.docx#Historical corrected edition v1.0.1 (unchanged)"
+            "The-Hollow-Meridian-v1.0.1-Correction-Log.md#Historical correction log v1.0.1 (unchanged)"
           )
-          if gh release view v1.0.1 >/dev/null 2>&1; then
-            gh release upload v1.0.1 "${release_assets[@]}" --clobber
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" "${release_assets[@]}" --clobber
+            gh release edit "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" --notes-file RELEASE-NOTES.md --latest
           else
-            gh release create v1.0.1 "${release_assets[@]}" \
+            gh release create "$RELEASE_TAG" "${release_assets[@]}" \
               --target "$(git rev-parse HEAD)" \
-              --title "The Hollow Meridian — Corrected Free Digital Edition v1.0.1" \
-              --notes "Corrected free digital edition of The Hollow Meridian by Jona Citrus Thyng. Complete 146,332-word novel in four parts and 30 chapters. This bounded correction resolves continuity, attribution, pronoun, timeline, and edition-formatting issues while preserving the story, title, character names, themes, relationships, voice, and ending. Copyright © 2026 Jona Citrus Thyng. Free to read and share in complete, unmodified form. All other rights reserved."
+              --title "$RELEASE_TITLE" --notes-file RELEASE-NOTES.md --latest
           fi

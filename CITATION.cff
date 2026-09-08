@@ -1,14 +1,27 @@
 cff-version: 1.2.0
-message: "If you reference this novel, please cite it using this metadata."
-type: book
-title: "The Hollow Meridian"
+message: "Please cite the novel using the preferred book citation below."
+title: "Hollow Meridian: signal — Illustrated Saga Edition"
 authors:
   - family-names: "Thyng"
     given-names: "Jona Citrus"
-date-released: 2026-08-24
-version: "1.0.1"
+version: "2.0.0"
+date-released: "2026-09-08"
 url: "https://hollow-meridian.doggiepuke.chatgpt.site"
+license-url: "https://github.com/jonacitrusthyng/the-hollow-meridian/blob/main/SHARING-PERMISSION.txt"
 abstract: >-
-  Signal Reader Mira Solenne has spent eleven years listening to the network
-  beneath the world. Then a silent Shard cluster disappears—and something
-  complete speaks from below the signal layer.
+  The complete illustrated first novel in the Hollow Meridian saga.
+  Book One follows the unaltered timeline: on the floating Gulf habitat
+  Perennial, Signal Reader Mira Solenne encounters a surviving presence
+  beneath the network. The saga continues with drift, the first temporal
+  intervention, and fracture, its consequences.
+preferred-citation:
+  type: book
+  title: "Hollow Meridian: signal"
+  authors:
+    - family-names: "Thyng"
+      given-names: "Jona Citrus"
+  year: 2026
+  edition: "Illustrated saga edition v2.0.0"
+  publisher:
+    name: "Jona Citrus Thyng"
+  url: "https://hollow-meridian.doggiepuke.chatgpt.site"
